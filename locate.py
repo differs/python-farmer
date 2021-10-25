@@ -30,49 +30,13 @@ def confirm_add_power():
         print(click_point)
         pyautogui.click(click_point)
 
-    # pyautogui.click('add_power_exchange_on.png')
-
-
-# while True:
-    # button = pyautogui.locateOnScreen('add-button.png')
-    # x,y = pyautogui.center(button)
-    # print(x, y)
-    # if pyautogui.locateOnScreen('addenrgy.png') != None:
-    #     pyautogui.click('addenrgy.png')
-    # if pyautogui.locateOnScreen('add-button.png') != None:
-        # pyautogui.click('add-button.png')
-        # print("add-button.png")
-
-        # if 1 <= 100:
-        #     pyautogui.click('add-button.png')
-        #     pyautogui.click("add-energy2.png")
-        #     time.sleep(0.5)
-        #     print("add-button.png")
-
-       
-        # pyautogui.click('add-energy2.png')
-        # pyautogui.click('add-energy2.png')
-        # pyautogui.click('add-energy2.png')
-        # pyautogui.click('add-energy2.png')
-
-        # print("点击 addenrg")
-    # if pyautogui.locateOnScreen('addhowmuch.png') !=None:
-    #     print(pyautogui.locateOnScreen("addhowmuch.png"))
-    #     pyautogui.click('addhowmuch.png')
-    #     pyautogui.write(200)
-    #     pyautogui.click('add-energy-exchange.png')
-
-    #     time.sleep(20)
-
-        # time.sleep(1)
-        # pyautogui.click('6.png')
-        # print("click 6.png")
-        # time.sleep(2)
 def open_add_power():
     point = pyautogui.locateOnScreen('open_add_power.png')
     if point != None:
-        click_point = pyautogui.center(point)
-        pyautogui.click(point)
+        # click_point = pyautogui.center(point)
+        print(point[0] + point[2], point[1] - point[3] / 2)
+        # click_point = (point[0] + point[2], point[1] / 2 + point[3] / 2)
+        pyautogui.click(point[0], point[1] + point[3] / 2)
 
 def water_add():
     point = pyautogui.locateOnScreen('water.png')
@@ -144,6 +108,12 @@ def water_everplants():
 
 # def open_mining():
 
+def power_full():
+    if pyautogui.onScreen('exchange_grey.png') or pyautogui.onScreen('cancel.png'):
+
+        if pyautogui.locateOnScreen('cancel.png') !=None:
+
+            pyautogui.click('cancel.png')
 
 def water_operate():
     open_map()
@@ -153,20 +123,28 @@ def water_operate():
     water_add()
     time.sleep(1)
 
+def power_operate():
+    open_add_power()
+    print("打开体力窗口")
+    time.sleep(2)
+
+    add_power()
+    print("加满")
+    time.sleep(2)
+
+    confirm_add_power()
+    print("确认")
+    time.sleep(2)
+
+    power_full()
+    print("power full")
+
+
 
 def main():
     while True:
-        open_add_power()
-        print("打开体力窗口")
-        time.sleep(2)
-
-        add_power()
-        print("加满")
-        time.sleep(2)
-
-        confirm_add_power()
-        print("确认")
-        time.sleep(2)
+       
+        power_operate()
 
         water_operate()
         print("准备加水")
